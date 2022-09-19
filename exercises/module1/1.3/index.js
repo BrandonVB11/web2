@@ -1,7 +1,7 @@
 var count = 0;
-var btn = document.getElementById("btn");
-var disp = document.getElementById("display");
-var span = document.getElementById("phrase");
+var btn = document.querySelector("#btn");
+var disp = document.querySelector("#display");
+var span = document.querySelector("#phrase");
   
 btn.onclick = function () {
      count++;
