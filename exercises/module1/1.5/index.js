@@ -2,6 +2,7 @@ var count = 0;
 var btn = document.querySelector("#btn");
 var disp = document.querySelector("#display");
 var span = document.querySelector("#phrase");
+var img = document.querySelector("#picture");
   
 btn.onclick = function () {
      count++;
@@ -17,3 +18,7 @@ btn.addEventListener("click", () => {
     };
     console.log("onClickHandlerForBtn1::click");
   });
+
+function returnPicture() {
+    
+}
