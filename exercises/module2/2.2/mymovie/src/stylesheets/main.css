@@ -7,7 +7,8 @@ hr{
 }
 
 #Title{
-    text-align: center;
+    text-align: left;
+    display: flexbox;
     color: red;
 }
 
@@ -25,3 +26,4 @@ header img{
 header{
     display: flexbox;
 }
+
