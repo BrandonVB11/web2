@@ -8,13 +8,58 @@
   </head>
 
   <body>
-    <header>
-      <img src="./img/m.gif" alt="logo">
-      <h1 id="Title">myMovies</h1>
-    </header>
-    <hr>
-    <p>Bienvenue sur le rivale numero 1 de NETFLIX</p>
+    <header></header>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col mt-2">
+            <form id="myForm">
+              <div class="mb-3">
+                <label for="lines" class="form-label">Number of lines</label>
+                <input
+                  type="number"
+                  name=""
+                  id="lines"
+                  class="form-control"
+                  placeholder="Enter number of lines"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="columns" class="form-label">Number of columns</label>
+                <input
+                  type="number"
+                  name=""
+                  id="columns"
+                  class="form-control"
+                  placeholder="Enter number of columns"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Initial string</label>
+                <input
+                  type="text"
+                  name=""
+                  id="startString"
+                  class="form-control"
+                  placeholder="Init string"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary" id="btn1">
+                Create table
+              </button>             
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!-- Make our table responsive with Bootstrap by wrapping it with .table-responsive -->
+            <div id="tableWrapper" class="table-responsive mt-3"></div>
+          </div>
+        </div>
+    </main>
     <footer></footer>
-    <main></main>
   </body>
 </html>

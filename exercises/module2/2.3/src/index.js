@@ -1,63 +1,42 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheets/main.css';
 
-const movies = [
-    {
-        id: 1,
-        title: "Red Notice",
-        diffusion: "16H40"
-    },
-    {
-        id: 2,
-        title: "Fast & Furions 10",
-        diffusion: "20h00"
+const myForm = document.querySelector('form');
+const linesInput = document.getElementById('lines');
+const columnsInput = document.getElementById('columns');
+const startStringInput = document.getElementById('startString');
+const tableWrapper = document.querySelector('#tableWrapper');
+
+myForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const expectedArray = createArray(linesInput.value, columnsInput.value, startStringInput.value);
+  const expectedHtmlTableAsString = createHtmlTableAsString(expectedArray);
+  tableWrapper.innerHTML = expectedHtmlTableAsString;
+});
+
+function createArray(lineCount = 1, columnCount = 1, startString = 'Cell') {
+  const expectedArray = [];
+  for (let x = 0; x < lineCount; x += 1) {
+    expectedArray.push([]);
+    for (let y = 0; y < columnCount; y += 1) {
+      expectedArray[x].push(`${startString}[${x}][${y}]`);
     }
-];
-
-
-function renderMenuFromString(menu) {
-    const menuTableAsString = getMenuTableAsString(menu);
-  
-    const main = document.querySelector('main');
-  
-    main.innerHTML += menuTableAsString;
   }
-  
-  function getMenuTableAsString(menu) {
-    const menuTableLines = getAllTableLinesAsString(menu);
-    const menuTable = addLinesToTableHeadersAndGet(menuTableLines);
-    return menuTable;
-  }
+  return expectedArray;
+}
 
-  function addLinesToTableHeadersAndGet(tableLines) {
-    const menuTable = `
-    <div class="table-responsive pt-5">
-      <table class="table table-danger">
-        <tr>
-          <th>Film</th>
-          <th>title</th>
-          <th>D</th>
-        </tr>
-        ${tableLines}    
-      </table>
-    </div>
-    `;
-    return menuTable;
-  };
+function createHtmlTableAsString(expectedArray) {
+  /* Neat way to loop through all data in the array, create a new array of string elements
+  (HTML tr/td tags) with map(), and create one string from the resulting array with join('').
+  '' means that the separator is a void string. */
 
-  function getAllTableLinesAsString(menu) {
-    let menuTableLines = '';
-  
-    menu?.forEach((movie) => {
-      menuTableLines += `<tr>
-        <td>${movie.title}</td>
-        <td>${movie.content}</td>
-        <td>${movie.diffusion}</td>
-      </tr>`;
-    });
-  
-    return menuTableLines;
-  };
+  const htmlTableLinesAsString = expectedArray
+    .map((line) => `<tr>${line.map((column) => `<td>${column}</td>`).join('')}</tr>`)
+    .join('');
 
-  
-renderMenuFromString(movies);
+  const htmlTableAsString = `<table class="table table-bordered text-nowrap">
+                          ${htmlTableLinesAsString}
+                      </table>`;
+
+  return htmlTableAsString;
+}
