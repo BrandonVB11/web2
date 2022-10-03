@@ -1,17 +1,11 @@
-// Import Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-// Custom styles
 import './stylesheets/main.css';
-
 import 'animate.css';
 
-const body = document.querySelector('body');
+import HomePage from './Components/Pages/HomePage';
+import Header from './Components/Header/Header';
+import Footer from './Components/Footer/Footer';
 
-body.addEventListener('click', startOrStopSound);
-
-function startOrStopSound() {
-  const myAudioPlayer = document.querySelector('#audioPlayer');
-
-  if (myAudioPlayer.paused) myAudioPlayer.play();
-  else myAudioPlayer.pause();
-}
+Header();
+HomePage();
+Footer();
