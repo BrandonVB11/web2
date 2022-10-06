@@ -1,5 +1,5 @@
 {
-  "name": "js-router-boilerplate",
+  "name": "mymovies",
   "version": "1.0.0",
   "description": "myJScourse's frontend boilerplate with a router",
   "scripts": {
@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "start": "webpack serve --mode development"
   },
-  "author": "e-baron",
+  "author": "brandonVB11",
   "license": "CC-BY-SA-4.0",
   "devDependencies": {
     "@babel/core": "^7.14.3",
