@@ -1,0 +1,28 @@
+body{
+    background-color: #272727;
+}
+
+hr{
+    color: red;
+}
+
+#Title{
+    text-align: center;
+    color: red;
+}
+
+p{
+    color: red;
+    text-align: center;
+}
+
+header img{
+    height: auto;
+    width: 200px;
+    display: block;
+}
+
+header{
+    display: block;
+}
+
