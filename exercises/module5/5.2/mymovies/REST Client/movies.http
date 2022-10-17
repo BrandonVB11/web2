@@ -1,0 +1,81 @@
+@baseUrl = http://localhost:3000
+
+### Read all films
+GET {{baseUrl}}/films
+
+### Create a film
+POST {{baseUrl}}/films/
+Content-Type: application/json
+
+{
+    "title":"La guerre des etoiles",
+    "duration": 136,
+    "budget": 115,
+    "link":"https://en.wikipedia.org/wiki/Star_Wars"
+}
+
+### Try to create a film with a parameter missing or empty string or string with whitespaces only
+POST {{baseUrl}}/films/
+Content-Type: application/json
+
+{
+    "title":" ",
+    "duration": 136,
+    "budget": 115,
+    "link":"https://kinepolis.be/fr/?main_section=tous%20les%20films"
+}
+
+### Try to create a film with a wrong budget
+POST {{baseUrl}}/films/
+Content-Type: application/json
+
+{
+    "title":"La Bagnole",
+    "duration": 136,
+    "budget": "115",
+    "link":"https://fr.wikipedia.org/wiki/Cars_(film)"
+}
+
+### Create another film
+POST {{baseUrl}}/films/
+Content-Type: application/json
+
+{
+    "title":"",
+    "duration": 1,
+    "budget": 11,
+    "link":"https://kinepolis.be/fr/?main_section=tous%20les%20films"
+}
+
+### Read film with ID == 1
+GET {{baseUrl}}/films/1
+
+
+### Update film with ID == 2
+PATCH {{baseUrl}}/films/2
+Content-Type: application/json
+
+{
+    "title":"Star Wars: Episode II – Attack of the Clones",
+    "duration": 142,
+    "budget": 115,
+    "link":"https://en.wikipedia.org/wiki/Star_Wars:_Episode_II_%E2%80%93_Attack_of_the_Clones"
+}
+
+### Delete the film with ID == 2
+DELETE {{baseUrl}}/films/2
+
+
+### Read all films with minimum duration of 140 minutes
+GET {{baseUrl}}/films?minimum-duration=140
+
+### Create a long film
+POST {{baseUrl}}/films/
+Content-Type: application/json
+
+{
+    "title":"l'histore des jouets 4",
+    "duration": 242,
+    "budget": 70,
+    "link":"https://nl.wikipedia.org/wiki/Toy_Story_4"
+}
