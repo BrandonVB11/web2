@@ -8,10 +8,10 @@ POST {{baseUrl}}/films/
 Content-Type: application/json
 
 {
-    "title":"Star Wars: The Phantom Menace (Episode I)",
+    "title":"La guerre des etoiles",
     "duration": 136,
     "budget": 115,
-    "link":"https://en.wikipedia.org/wiki/Star_Wars:_Episode_I_%E2%80%93_The_Phantom_Menace"
+    "link":"https://en.wikipedia.org/wiki/Star_Wars"
 }
 
 ### Try to create a film with a parameter missing or empty string or string with whitespaces only
@@ -22,7 +22,7 @@ Content-Type: application/json
     "title":" ",
     "duration": 136,
     "budget": 115,
-    "link":"https://en.wikipedia.org/wiki/Star_Wars:_Episode_I_%E2%80%93_The_Phantom_Menace"
+    "link":"https://kinepolis.be/fr/?main_section=tous%20les%20films"
 }
 
 ### Try to create a film with a wrong budget
@@ -30,10 +30,10 @@ POST {{baseUrl}}/films/
 Content-Type: application/json
 
 {
-    "title":"Star Wars: The Phantom Menace (Episode I)",
+    "title":"La Bagnole",
     "duration": 136,
     "budget": "115",
-    "link":"https://en.wikipedia.org/wiki/Star_Wars:_Episode_I_%E2%80%93_The_Phantom_Menace"
+    "link":"https://fr.wikipedia.org/wiki/Cars_(film)"
 }
 
 ### Create another film
@@ -41,10 +41,10 @@ POST {{baseUrl}}/films/
 Content-Type: application/json
 
 {
-    "title":"Star Wars: Episode 2",
+    "title":"",
     "duration": 1,
     "budget": 11,
-    "link":"findIt.com"
+    "link":"https://kinepolis.be/fr/?main_section=tous%20les%20films"
 }
 
 ### Read film with ID == 1
@@ -74,8 +74,8 @@ POST {{baseUrl}}/films/
 Content-Type: application/json
 
 {
-    "title":"Zack Snyder's Justice League",
+    "title":"l'histore des jouets 4",
     "duration": 242,
     "budget": 70,
-    "link":"https://en.wikipedia.org/wiki/Zack_Snyder%27s_Justice_League"
+    "link":"https://nl.wikipedia.org/wiki/Toy_Story_4"
 }

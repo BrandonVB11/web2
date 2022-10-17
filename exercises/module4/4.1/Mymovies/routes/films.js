@@ -7,7 +7,7 @@ const films = [
         title: 'Rapide & Furieux',
         duration: 240,
         budget: 10,
-        link:"https://kinepolis.be/fr/?main_section=tous%20les%20films",
+        link:"https://fr.wikipedia.org/wiki/Fast_and_Furious_(s%C3%A9rie_de_films)",
       },
       {
         id: 2,
