@@ -1,36 +1,30 @@
 const express = require('express');
-const path = require('node:path');
-const { parse, serialize } = require('../utils/json');
+const {
+  readAllFilms,
+  readOneFilm,
+  createOneFilm,
+  deleteOneFilm,
+  updateOneFilm,
+} = require('../models/films');
 
 const router = express.Router();
 
-const jsonDbPath = path.join(__dirname, '/../data/films.json');
-
 // Read all the films, filtered by minimum-duration if the query param exists
 router.get('/', (req, res) => {
-  const minimumFilmDuration = req?.query ? parseInt(req.query['minimum-duration'], 10) : undefined;
-  if (minimumFilmDuration && (typeof minimumFilmDuration !== 'number' || minimumFilmDuration <= 0))
-    return res.sendStatus(400);
+  const filmsPotentiallyFiltered = readAllFilms(req?.query?.['minimum-duration']);
 
-  const films = parse(jsonDbPath);
+  if (filmsPotentiallyFiltered === undefined) return res.sendStatus(400);
 
-  if (!minimumFilmDuration) return res.json(films);
-
-  const filmsReachingMinimumDuration = films.filter((film) => film.duration >= minimumFilmDuration);
-  return res.json(filmsReachingMinimumDuration);
+  return res.json(filmsPotentiallyFiltered);
 });
 
 // Read a film from its id in the menu
 router.get('/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const foundFilm = readOneFilm(req?.params?.id);
 
-  const films = parse(jsonDbPath);
+  if (!foundFilm) return res.sendStatus(404);
 
-  const indexOfFilmFound = films.findIndex((film) => film.id === id);
-
-  if (indexOfFilmFound < 0) return res.sendStatus(404);
-
-  return res.json(films[indexOfFilmFound]);
+  return res.json(foundFilm);
 });
 
 // Create a film
@@ -46,34 +40,18 @@ router.post('/', (req, res) => {
 
   if (!title || !link || !duration || !budget) return res.sendStatus(400);
 
-  const films = parse(jsonDbPath);
-  const lastItemIndex = films?.length !== 0 ? films.length - 1 : undefined;
-  const lastId = lastItemIndex !== undefined ? films[lastItemIndex]?.id : 0;
-  const nextId = lastId + 1;
+  const createdFilm = createOneFilm(title, link, duration, budget);
 
-  const newFilm = { id: nextId, title, link, duration, budget };
-
-  films.push(newFilm);
-
-  serialize(jsonDbPath, films);
-
-  return res.json(newFilm);
+  return res.json(createdFilm);
 });
 
 // Delete a film
 router.delete('/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const films = parse(jsonDbPath);
-  const indexOfFilmFound = films.findIndex((film) => film.id === id);
+  const deletedFilm = deleteOneFilm(req?.params?.id);
 
-  if (indexOfFilmFound < 0) return res.sendStatus(404);
+  if (!deletedFilm) return res.sendStatus(404);
 
-  const itemsRemoved = films.splice(indexOfFilmFound, 1);
-  const itemRemoved = itemsRemoved[0];
-
-  serialize(jsonDbPath, films);
-
-  return res.json(itemRemoved);
+  return res.json(deletedFilm);
 });
 
 // Update a film identified by its id
@@ -82,7 +60,6 @@ router.patch('/:id', (req, res) => {
   const link = req?.body?.link;
   const duration = req?.body?.duration;
   const budget = req?.body?.budget;
-  const id = parseInt(req.params.id, 10);
 
   if (
     !req.body ||
@@ -93,22 +70,9 @@ router.patch('/:id', (req, res) => {
   )
     return res.sendStatus(400);
 
-  const films = parse(jsonDbPath);
-  const indexOfFilmFound = films.findIndex((film) => film.id === id);
+  const updatedFilm = updateOneFilm(req?.params?.id, req?.body);
 
-  if (indexOfFilmFound < 0) return res.sendStatus(404);
-
-  const filmPriorToChange = films[indexOfFilmFound];
-  const objectContainingPropertiesToBeUpdated = req.body;
-
-  const updatedFilm = {
-    ...filmPriorToChange,
-    ...objectContainingPropertiesToBeUpdated,
-  };
-
-  films[indexOfFilmFound] = updatedFilm;
-
-  serialize(jsonDbPath, films);
+  if (!updatedFilm) return res.sendStatus(404);
 
   return res.json(updatedFilm);
 });
