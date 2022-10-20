@@ -65,6 +65,11 @@ Content-Type: application/json
 ### Delete the film with ID == 2
 DELETE {{baseUrl}}/films/2
 
+### Delete the film with ID == 1
+DELETE {{baseUrl}}/films/1
+
+### Delete the film with ID == 3
+DELETE  {{baseUrl}}/films/3
 
 ### Read all films with minimum duration of 140 minutes
 GET {{baseUrl}}/films?minimum-duration=140
