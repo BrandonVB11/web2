@@ -1,7 +1,6 @@
 module.exports = {
   ...require('prettier-airbnb-config'),
-  printWidth: 100,
+  printWidth: 120,
   arrowParens: 'always',
   bracketSpacing: true,
-  trailingComma: 'all',
 };
